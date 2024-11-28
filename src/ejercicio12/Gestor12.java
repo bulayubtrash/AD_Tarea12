@@ -310,8 +310,9 @@ public class Gestor12 {
 			// TODO: handle exception
 		}
 	}
+	
 
-	public ArrayList<Alumno> recogerAlumnos() {
+	public ArrayList<Alumno> recogerAlumnos() {   
 	    aLista.clear(); 
 	    String sql = "SELECT nia, nombre, apellido, genero, fechaNac, ciclo, curso, id_grupo FROM alumnos";
 
@@ -581,12 +582,12 @@ public class Gestor12 {
 				al.appendChild(genero);
 				
 				if(alumno.getFechaNac()!=null) {
-//					SimpleDateFormat formato= new SimpleDateFormat("dd/mm/yyyy");
-//					String fechaM=formato.format(alumno.getFechaNac());
+					SimpleDateFormat formato= new SimpleDateFormat("dd/mm/yyyy");
+					String fechaM=formato.format(alumno.getFechaNac());
 					
 					Element fechaXML=d.createElement("FechaNacimiento");
-//					fechaXML.appendChild(d.createTextNode(fechaM));
-					fechaXML.appendChild(d.createTextNode(String.valueOf(a1.getFechaNac())));
+					fechaXML.appendChild(d.createTextNode(fechaM));
+//					fechaXML.appendChild(d.createTextNode(String.valueOf(a1.getFechaNac())));
 
 					al.appendChild(fechaXML);
 				}else {
@@ -656,7 +657,9 @@ public class Gestor12 {
 	            alumnoElement.setAttribute("nombre", alumno.getNombre());
 	            alumnoElement.setAttribute("apellidos", alumno.getApellidos());
 	            alumnoElement.setAttribute("genero", String.valueOf(alumno.getGenero()));
-	            alumnoElement.setAttribute("fechaNacimiento", String.valueOf(alumno.getFechaNac()));
+	            SimpleDateFormat formato= new SimpleDateFormat("dd/mm/yyyy");
+	            String txt= formato.format(a1.getFechaNac());
+	            alumnoElement.setAttribute("fechaNacimiento", txt);
 	            alumnoElement.setAttribute("ciclo", alumno.getCiclo());
 	            alumnoElement.setAttribute("curso", alumno.getCurso());
 	            alumnoElement.setAttribute("grupo", alumno.getGrupo());
@@ -714,7 +717,9 @@ public class Gestor12 {
 
 	                String fechaNacimientoStr = alumnoElement.getAttribute("fechaNacimiento");
 	                if (!fechaNacimientoStr.isEmpty()) {
-	                    SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", java.util.Locale.ENGLISH);
+//	                    SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", java.util.Locale.ENGLISH);
+	                    SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy");
+
 	                    a1.setFechaNac(formato.parse(fechaNacimientoStr));
 	                } else {
 	                    a1.setFechaNac(null);
@@ -758,7 +763,9 @@ public class Gestor12 {
 
 	                String fechaNacimientoStr = alumnoElement.getElementsByTagName("FechaNacimiento").item(0).getTextContent();
 	                if (!fechaNacimientoStr.isEmpty() && !fechaNacimientoStr.equals("null")) {
-	                    SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", java.util.Locale.ENGLISH);
+//	                    SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", java.util.Locale.ENGLISH);
+	                    SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy");
+
 	                    a1.setFechaNac(formato.parse(fechaNacimientoStr));
 	                } else {
 	                    a1.setFechaNac(null);
